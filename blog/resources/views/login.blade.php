@@ -24,8 +24,11 @@
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
                                 <button  class="btn btn-lg btn-success btn-block">Login</button>
+
                             </fieldset>
                         </form>
+                         <div class="text-right"> <a href="{{url('forgot')}}">
+                                <i class="fa fa-lock m-r-5"></i>Forgot Your Password</a></div>
                     </div>
                 </div>
             </div>

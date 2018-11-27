@@ -21,6 +21,10 @@ Route::group(['middleware' => 'web'],function(){
 	Route::post('login', 'UserController@postLogin');
 		// Logout 
 		Route::get('logout', 'UserController@logout')->name('logout');
+		//forgot password
+				Route::get('forgot', 'UserController@getForgotPassword');
+		Route::post('forgot', 'UserController@postForgotPassword');
+
 		/**
 		 * Auth MiddleWare Group Routes
 		 */

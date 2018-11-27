@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use Auth; 
-
+use Config;
 class UserController extends Controller
 {
     /**
@@ -132,4 +132,53 @@ class UserController extends Controller
             return redirect('/');
         }
     }
+    /**
+     * @DateOfCreation      27-November-2018 
+     * @ShortDescription    This function displays form to forgot password
+     */
+    public function getForgotPassword()
+    {
+        return view('forgotpassword');
+    }
+
+    public function postForgotPassword(Request $request)
+    {
+        $rules = ['user_email' => 'required|email'];
+        $validator = Validator::make($request->all(),$rules);
+    if($validator->fails())
+    {
+         // redirect our user back to the form with the errors from the validator
+            return redirect()->back()->withInput()->withErrors($validator->errors());
+    }
+    else
+    {
+        try {
+                $userData = User::where([['user_email', '=', $request->input("user_email") ]])->first();                
+               
+                if($userData){
+                  
+                    // Send welcome email here
+                    $affectedRows = User::where('user_id', '=', $userData->user_id)->update(['is_request_reset_password' => Config::get('constants.RESET_PASSWORD_YES')]);
+                    
+                    if($affectedRows > 0){
+                          echo "if";
+                    die;
+                                           
+                    } else {
+                    }
+                }else{
+
+                    return redirect()->back()->withInput()->withErrors(__('messages.try_again')); 
+                }
+
+            } catch (Exception $e) {
+echo "catch";
+die;
+                $eMessage = $this->exceptionLibObj->reFormAndLogException($ex,'AdminController', 'postRegister');   
+                return redirect()->back()->withInput()->withErrors($eMessage); 
+            }           
+    }
+    }
+
+    
 }
