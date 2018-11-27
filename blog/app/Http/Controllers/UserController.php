@@ -269,7 +269,6 @@ class UserController extends Controller
     {
         $requestData = $request->only(['user_password', 'confirm_password', 'user_id','user_email']);
         $requestData['user_id'] = $this->securityLibObj->decrypt($requestData['user_id']);
-
         $rules = array(
             'user_password'     => 'required|min:6',
             'confirm_password'  => 'required|same:user_password'
@@ -277,20 +276,17 @@ class UserController extends Controller
         $messages = array(
             'user_password.regex' => __('messages.valid_password_format_msg') 
         );
-
-    // set validator
+        // set validator
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) 
         {
-
-    // redirect our user back to the form with the errors from the validator
+            // redirect our user back to the form with the errors from the validator
             return redirect()->back()->withInput()->withErrors($validator->errors());
         }
         else
         {
-
             try {
-    //final array of the data from the request
+                //final array of the data from the request
                 $userData = array(
                     'user_password'     => bcrypt($request->input("user_password")),
                     'updated_at'        => date('Y-m-d H:i:s'),
@@ -300,19 +296,15 @@ class UserController extends Controller
                 $userType = User::where([['user_email', '=', $user_email]])->first();
                 $affectedRows = User::where('user_id', '=', $requestData['user_id'])->update($userData);
                 if($affectedRows > 0){
-
                     return redirect('/')->with('message', __('messages.password_reset_successfully'));
-
                 }else{
                     return redirect()->back()->withInput()->withErrors(__('messages.try_again')); 
                 }
 
             } catch (Exception $e) {
-
-                $eMessage = $this->exceptionLibObj->reFormAndLogException($ex,'AdminController', 'postResetPassword');   
+                $eMessage = $this->exceptionLibObj->reFormAndLogException($ex,'AdminController', 'postResetPassword');  
                 return redirect()->back()->withInput()->withErrors($eMessage); 
             }
         }   
     }
-
 }

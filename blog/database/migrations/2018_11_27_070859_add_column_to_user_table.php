@@ -15,6 +15,7 @@ class AddColumnToUserTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->tinyInteger('is_request_reset_password')->unsigned()->index()->default(2)->comment('1 for Yes, 2 for No');
+            
         });
     }
 
