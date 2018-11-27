@@ -11,6 +11,24 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['middleware' => 'web'],function(){
+	// Register Routes
+	Route::get('register', 'UserController@getRegister');
+	Route::post('register', 'UserController@postRegister');
+	//login routes
+	Route::get('/', 'UserController@getLogin')->name('login');
+	Route::post('login', 'UserController@postLogin');
+		// Logout 
+		Route::get('logout', 'UserController@logout')->name('logout');
+		/**
+		 * Auth MiddleWare Group Routes
+		 */
+
+	
+	  Route::group(['middleware' => 'auth'], function() {
+    			Route::get('welcome', ['uses' => 'BlogController@index']);
+
+    });
 });
+

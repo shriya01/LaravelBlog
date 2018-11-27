@@ -15,15 +15,26 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'user_firstname', 'user_lastname','user_email', 'user_password',
     ];
 
+    protected $primaryKey = "user_id";
+    
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'user_password', 'remember_token',
     ];
+    /**
+     * @DateOfCreation      27-November-2018
+     * @ShortDescription    This function overrides the method 
+     * @return object [password object to match for login]
+     */
+    public function getAuthPassword()
+    {
+        return $this->user_password;
+    }
 }
