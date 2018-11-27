@@ -13,10 +13,17 @@ return [
     |
     */
 
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
+    'password'                  => 'Password must have a minimum of 6 characters and contain at least one alphabetic character, one number.',
+    'reset'                     => 'Your password has been reset!',
+    'sent'                      => 'We have e-mailed your password reset link!',
+    'token'                     => 'This password reset token is invalid.',
+    'user'                      => "We can't find a user with that e-mail address.",
+    'subject_reset_password'    => Config::get('constants.APP_NAME').'- Password Reset',
+    'subject_change_password'   => Config::get('constants.APP_NAME').'- Password Changed',
+    'label_change_password'     => 'Change Password',
+    'label_update_password'     => 'Update Password',
+    'label_current_password'    => 'Current password',
+    'label_new_password'        => 'New Password',
+    'label_confirm_password'    => 'Confirm password',
 
 ];

@@ -24,6 +24,8 @@ Route::group(['middleware' => 'web'],function(){
 		//forgot password
 				Route::get('forgot', 'UserController@getForgotPassword');
 		Route::post('forgot', 'UserController@postForgotPassword');
+		Route::get('forgot-password-verification/{encryptedEmail}/{encryptedUserId}', 'UserController@resetPassword');
+		Route::post('resetpassword', 'UserController@postResetPassword');
 
 		/**
 		 * Auth MiddleWare Group Routes

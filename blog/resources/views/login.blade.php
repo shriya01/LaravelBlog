@@ -27,8 +27,15 @@
 
                             </fieldset>
                         </form>
-                         <div class="text-right"> <a href="{{url('forgot')}}">
-                                <i class="fa fa-lock m-r-5"></i>Forgot Your Password</a></div>
+        
+                         <div > 
+                   <a href="{{url('register')}}">
+                                Register new user</a>
+                            <a href="{{url('forgot')}}" class="pull-right">
+                                <i class="fa fa-lock " ></i>    Forgot Your Password</a>
+
+                          
+                            </div>
                     </div>
                 </div>
             </div>
